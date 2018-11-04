@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Burger App</title>
+	<script src="https://code.jquery.com/jquery.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.min.js"></script>
+	<link rel="stylesheet" type="text/css" media="screen" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" />
+	<script src="/assets/js/script.js"></script>
+
+	<script id="page-template" type="text/x-handlebars-template">
+		<div class="ui basic padded segment">
+			<h1>Eat The Burger</h1>
+		</div>
+
+		<div class="ui three column grid">
+			<div class="column">
+				<div class="ui yellow inverted segment">
+					<div class="ui header">
+						To Be Devoured
+					</div>
+			    {{#each burgers}}
+			        {{#unless devoured}}
+			            {{> burger-block devoured=true}}
+			        {{/unless}}
+			    {{/each}}
+				</div>
+			</div>
+
+			<div class="column">
+				<div class="ui brown inverted segment">
+					<div id="message" class="ui hidden error message">
+						<i class="close icon"></i>
+						<div class="header">
+							You must enter a burger name
+						</div>
+					</div>
+					<form class="ui form">
+						<div class="field">
+							<h4 style="color:white">Add Burger</h4>
+							<input type="text" id="txtBurger">
+						</div>
+						<button class="ui green button" id='btnAdd'>Add Burger</button>
+					</form>
+				</div>
+			</div>
+
+			<div class="column">
+		    <div class="ui yellow inverted segment">
+			    <h3>Devoured</h3>
+			    {{#each burgers}}
+			    	{{#if devoured}}
+			    		{{> burger-block devoured=false}}
+			    	{{/if}}
+			    {{/each}}
+		    </div>
+			</div>
+		</div>
+
+	</script>
+
+	<script id="burger-block-partial" type="text/x-handlebars-template">
+
+		<p>#{{id}} {{burger_name}}
+			{{#if devoured}}
+				<button class='btnDevour ui small basic red button' data-id={{id}}>Devour</button>
+			{{/if}}
+		</p>
+
+	</script>
+</head>
+<body>
+	<div class="ui container">
+		<div id="app"></div>
+	</div>
+</body>
+</html>
