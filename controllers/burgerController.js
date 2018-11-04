@@ -14,13 +14,12 @@ module.exports = app => {
 	});
 
 	app.post('/api/burgers', (req, res) => {
-		let burgerName = req.body;
+		let burgerName = req.body.burgerName;
 		burger.insertOne(burgerName, data => res.json(data));
 	});
 
 	app.put('/api/burgers/:id', (req, res) => {
 		let id = req.params.id;
-		let status = req.body.status;
-		burger.updateOne(id, status, (data) => res.json(data));
+		burger.updateOne(id, true, (data) => res.json(data));
 	});
 }
