@@ -8,8 +8,13 @@ const connection = mysql.createConnection({
 	database: 'burgers_db'
 });
 
-connection.connect(err => {
-	if (err) throw err.stack;
-	console.log("Connected!!");
-});
+if(process.env.JAWSDB_URL) {
+  connection = mysql.createConnection(process.env.JAWSDB_URL)
+} else {
+	connection.connect(err => {
+		if (err) throw err.stack;
+		console.log("Connected!!");
+	});
+}
+
 module.exports = connection;
